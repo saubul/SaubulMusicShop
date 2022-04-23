@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    username: postgres
+    password: ld2erw71904
+    url: jdbc:postgresql://localhost:5432/shopdb
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
