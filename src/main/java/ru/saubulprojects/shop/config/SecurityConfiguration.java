@@ -13,4 +13,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		this.passEncoder = passEncoder;
 	}
 	
+	
 }
