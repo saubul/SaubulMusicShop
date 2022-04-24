@@ -24,4 +24,7 @@ public class UserRegistrationDTO {
 	@NotBlank(message = "Необходимо ввести пароль.")
 	private String password;
 	
+	@NotBlank(message = "Необходимо ввести номер телефона.")
+	@Pattern(regexp = "^8[0-9]{10}$", message = "Введите корректный номер телефона.")
+	private String phone;
 }

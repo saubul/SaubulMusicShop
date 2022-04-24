@@ -42,7 +42,9 @@ public class UserServiceImpl implements UserService{
 				  					  userDTO.getLastName(), 
 				  					  userDTO.getEmail(), 
 				  					  passEncoder.encode(userDTO.getPassword()),
-				  					  Arrays.asList(roleRepo.findByName("ROLE_USER"))));
+				  					  userDTO.getPhone(),
+				  					  Arrays.asList(roleRepo.findByName("ROLE_USER"))
+				  					  ));
 	}
 	
 	@Override
