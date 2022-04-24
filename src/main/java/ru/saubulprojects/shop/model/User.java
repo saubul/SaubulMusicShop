@@ -35,4 +35,16 @@ public class User {
 			   joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "user_id_fk"))},
 			   inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "role_id_fk"))})
 	private Collection<Role> roles;
+	
+	public User(String firstName,
+				String lastName,
+				String email,
+				String password,
+				Collection<Role> roles) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+	}
 }

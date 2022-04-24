@@ -7,21 +7,21 @@ import lombok.Data;
 @Data
 public class UserRegistrationDTO {
 	
-	@NotBlank(message = "First name is required.")
-	@Size(min = 2, message = "First name is too small.")
-	@Pattern(regexp = "[a-zA-Z]{1,}", message = "Use latin letters.")
+	@NotBlank(message = "Необходимо ввести имя.")
+	@Size(min = 2, message = "Имя слишком корткое.")
+	//@Pattern(regexp = "[а-ЯА-Я]{1,}", message = "Можно использовать только кириллицу.")
 	private String firstName;
 	
-	@NotBlank(message = "Last name is required.")
-	@Size(min = 2, message = "Last name is too small.")
-	@Pattern(regexp = "[a-zA-Z]{1,}", message = "Use latin letters.")
+	@NotBlank(message = "Необходимо ввести фамилию.")
+	@Size(min = 2, message = "Фамилия слишком короткая.")
+	//@Pattern(regexp = "[а-ЯА-Я]{1,}", message = "Можно использовать только кириллицу.")
 	private String lastName;
 	
-	@Email(message = "Please provide a valid email address.")
-	@Pattern(regexp = ".+@.+\\..+")
+	@Email(message = "Введите электронную почту в правильном формате.")
+	@Pattern(regexp = ".+@.+\\..+", message = "Введите электронную почту в правильном формате.")
 	private String email;
 	
-	@NotBlank(message = "Password is required.")
+	@NotBlank(message = "Необходимо ввести пароль.")
 	private String password;
 	
 }

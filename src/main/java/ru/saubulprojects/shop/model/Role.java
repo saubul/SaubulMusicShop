@@ -1,8 +1,6 @@
 package ru.saubulprojects.shop.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,11 +21,9 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Enumerated
-	@Column(name = "role_name")
-	private RoleType roleName;
+	private String name;
 	
-	public enum RoleType {
-		ROLE_USER, ROLE_ADMIN;
+	public Role(String name) {
+		this.name = name;
 	}
 }
