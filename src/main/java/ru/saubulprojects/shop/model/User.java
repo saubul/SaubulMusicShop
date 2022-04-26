@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users", 
+@Table(name = "users", schema = "shop",
 	   uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "email_constraint")})
 @Data
 @AllArgsConstructor
@@ -32,11 +32,14 @@ public class User {
 	
 	private String phone;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "users_roles",
+	@ManyToMany
+	@JoinTable(name = "users_roles", schema = "shop",
 			   joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "user_id_fk"))},
 			   inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "role_id_fk"))})
 	private Collection<Role> roles;
+	
+	@OneToMany(mappedBy = "user")
+	private Collection<Order> orders;
 	
 	public User(String firstName,
 				String lastName,
