@@ -26,7 +26,7 @@ public class Order {
 	@Column(name = "date_created")
 	private LocalDateTime dateCreated;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "orderId")
+	@OneToMany(targetEntity = OrderProduct.class, mappedBy = "orderId")
 	public Collection<OrderProduct> orderProducts;
 	
 	@ManyToOne(targetEntity = User.class)

@@ -32,13 +32,13 @@ public class User {
 	
 	private String phone;
 	
-	@ManyToMany
+	@ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "users_roles", schema = "shop",
 			   joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "user_id_fk"))},
 			   inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "role_id_fk"))})
 	private Collection<Role> roles;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(targetEntity = Order.class, mappedBy = "user")
 	private Collection<Order> orders;
 	
 	public User(String firstName,

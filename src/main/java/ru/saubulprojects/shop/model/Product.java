@@ -23,6 +23,6 @@ public class Product {
 	
 	private String description;
 	
-	@OneToMany(mappedBy = "productId")
+	@OneToMany(targetEntity = OrderProduct.class, mappedBy = "productId")
     private Collection<OrderProduct> orderProducts;
 }

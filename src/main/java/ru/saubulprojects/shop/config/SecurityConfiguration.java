@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import ru.saubulprojects.shop.service.UserService;
 
@@ -38,6 +39,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests()
+				.antMatchers("/profile/**")
+				.hasRole("USER")
 				.anyRequest()
 				.permitAll()
 				.and()
@@ -47,9 +50,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				.permitAll()
 				.and()
 			.logout()
-				.logoutSuccessUrl("/login?success")
 				.invalidateHttpSession(true)
 				.clearAuthentication(true)
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/")
 				.permitAll();
 	}
 	
