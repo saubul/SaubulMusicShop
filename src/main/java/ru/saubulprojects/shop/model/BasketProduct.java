@@ -6,26 +6,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "basket_products", schema = "shop")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "orders_products", schema = "shop")
-public class OrderProduct {
+public class BasketProduct {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(targetEntity = Order.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "order_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "order_id_fk"))
-	private Order orderId;
+	@ManyToOne
+	@JoinColumn(name = "basket_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "basket_id_fk"))
+	private Basket basketId;
 	
-	@ManyToOne(targetEntity = Product.class, fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "product_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "product_id_fk"))
 	private Product productId;
 	
 	private int count;
 	
-	private int price;
 }

@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import ru.saubulprojects.shop.dto.UserRegistrationDTO;
+import ru.saubulprojects.shop.dto.UserDTO;
 import ru.saubulprojects.shop.model.Role;
 import ru.saubulprojects.shop.model.User;
 import ru.saubulprojects.shop.repository.RoleRepository;
@@ -37,14 +37,24 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public User save(UserRegistrationDTO userDTO) {
+	public User save(UserDTO userDTO) {
 		return userRepo.save(new User(userDTO.getFirstName(), 
 				  					  userDTO.getLastName(), 
 				  					  userDTO.getEmail(), 
 				  					  passEncoder.encode(userDTO.getPassword()),
 				  					  userDTO.getPhone(),
-				  					  Arrays.asList(roleRepo.findByName("ROLE_USER"))
+				  					  Arrays.asList(roleRepo.findByName("ROLE_USER")),
+				  					  userDTO.getImg()
 				  					  ));
+	}
+	
+	@Override
+	public User update(User user, User user2) {
+		user.setFirstName(user2.getFirstName());
+		user.setLastName(user2.getLastName());
+		user.setPhone(user2.getPhone());
+		return userRepo.save(user);
+		
 	}
 	
 	@Override
@@ -59,6 +69,6 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName().toString())).collect(Collectors.toList());
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}
 }

@@ -3,6 +3,9 @@ package ru.saubulprojects.shop.model;
 import java.util.Collection;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,15 +17,22 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User{
+	
+	private final static String SEQ_NAME = "user_seq";
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
+	@SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
 	private Long id;
 	
+	@NotBlank(message = "Необходимо ввести имя.")
+	@Size(min = 2, message = "Имя слишком корткое.")
 	@Column(name = "first_Name")
 	private String firstName;
 	
+	@NotBlank(message = "Необходимо ввести фамилию.")
+	@Size(min = 2, message = "Фамилия слишком короткая.")
 	@Column(name = "last_Name")
 	private String lastName;
 	
@@ -30,6 +40,8 @@ public class User {
 	
 	private String password;
 	
+	@NotBlank(message = "Необходимо ввести номер телефона.")
+	@Pattern(regexp = "^8[0-9]{10}$", message = "Введите корректный номер телефона.")
 	private String phone;
 	
 	@ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
@@ -41,17 +53,24 @@ public class User {
 	@OneToMany(targetEntity = Order.class, mappedBy = "user")
 	private Collection<Order> orders;
 	
+	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+	private Basket basket;
+	
+	private String img;
+	
 	public User(String firstName,
 				String lastName,
 				String email,
 				String password,
 				String phone,
-				Collection<Role> roles) {
+				Collection<Role> roles,
+				String img) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.phone = phone;
 		this.roles = roles;
+		this.img = img;
 	}
 }

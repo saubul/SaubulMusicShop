@@ -22,9 +22,9 @@
 					    Каталог
 					  </button>
 					  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					    <li><a class="dropdown-item" href="#">Action</a></li>
-					    <li><a class="dropdown-item" href="#">Another action</a></li>
-					    <li><a class="dropdown-item" href="#">Something else here</a></li>
+					    <li><a class="dropdown-item" th:href="@{/}">Action</a></li>
+					    <li><a class="dropdown-item" th:href="@{/}">Another action</a></li>
+					    <li><a class="dropdown-item" th:href="@{/}">Something else here</a></li>
 					  </ul>
 					</div>
 		    		<form class="d-flex mx-3">
@@ -33,7 +33,10 @@
 					</form>
 		    				
 	    		</div>
-					<a class="nav-link active h6 my-0" sec:authorize="isAnonymous()" th:href="@{/login}">Войти</a>
+	    			<div class = "d-flex">
+						<a class="nav-link active h6 my-0" sec:authorize="isAnonymous()" th:href="@{/login}">Войти</a>
+						<a class="nav-link active h6 my-0" sec:authorize="isAnonymous()" th:href="@{/registration}">Зарегистрироваться</a>
+					</div>
 					<a class="nav-link active h6 my-0" sec:authorize="isAuthenticated()" th:href="@{/profile}">Личный кабинет</a>
 				</div>			
 		</nav>

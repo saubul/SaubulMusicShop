@@ -1,5 +1,7 @@
 package ru.saubulprojects.shop.controller;
 
+import java.util.Objects;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import ru.saubulprojects.shop.dto.UserRegistrationDTO;
+import ru.saubulprojects.shop.dto.UserDTO;
 import ru.saubulprojects.shop.service.UserService;
 
 @Controller
@@ -21,13 +23,18 @@ public class AuthController {
 		this.userService = userService;
 	}
 	
-	@ModelAttribute("user")
-	public UserRegistrationDTO userRegistrationDTO() {
-		return new UserRegistrationDTO();
+	@ModelAttribute("userDTO")
+	public UserDTO userDTO() {
+		return new UserDTO();
 	}
 	
 	@ModelAttribute("userExists")
 	public boolean exist() {
+		return false;
+	}
+	
+	@ModelAttribute("passMismatchs")
+	public boolean mismatch() {
 		return false;
 	}
 	
@@ -42,8 +49,13 @@ public class AuthController {
 	}
 	
 	@PostMapping("/registration")
-	public String register(@Valid @ModelAttribute("user") UserRegistrationDTO userDTO, Errors errors, Model model) {
+	public String register(@Valid @ModelAttribute("userDTO") UserDTO userDTO, Errors errors, Model model) {
 		if(errors.hasErrors()) {
+			return "auth/registration";
+		}
+		
+		if(!Objects.equals(userDTO.getPassword(), userDTO.getMatchingPassword())) {
+			model.addAttribute("passMismatchs", true);
 			return "auth/registration";
 		}
 		

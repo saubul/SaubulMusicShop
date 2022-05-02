@@ -1,5 +1,6 @@
 package ru.saubulprojects.shop.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
@@ -32,4 +33,9 @@ public class Order {
 	@ManyToOne(targetEntity = User.class)
 	@JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "user_id_fk"))
 	private User user;
+	
+	private BigDecimal price;
+	
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status;
 }
