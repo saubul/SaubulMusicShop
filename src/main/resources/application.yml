@@ -7,11 +7,16 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
   mvc:
     hiddenmethod:
       filter:
         enabled: true
+  flyway:
+    schemas:
+    - shop
+    default-schema: shop

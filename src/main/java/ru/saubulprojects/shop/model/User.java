@@ -19,11 +19,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User{
 	
-	private final static String SEQ_NAME = "user_seq";
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
-	@SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotBlank(message = "Необходимо ввести имя.")

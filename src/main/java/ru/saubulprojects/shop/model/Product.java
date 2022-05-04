@@ -33,7 +33,7 @@ public class Product {
 	private Collection<BasketProduct> basketProducts;
 	
 	@ManyToMany
-	@JoinTable(name = "categories_products",
+	@JoinTable(name = "categories_products", schema = "shop",
 			   joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "product_id_fk"))},
 			   inverseJoinColumns = {@JoinColumn(name = "category_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "category_id_fk"))}
 	)
