@@ -1,0 +1,1 @@
+alter table shop.products add column img varchar(255);	

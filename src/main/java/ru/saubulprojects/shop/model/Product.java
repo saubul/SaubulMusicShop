@@ -26,6 +26,8 @@ public class Product {
 	
 	private BigDecimal price;
 	
+	private String img;
+	
 	@OneToMany(targetEntity = OrderProduct.class, mappedBy = "productId")
     private Collection<OrderProduct> orderProducts;
 	
