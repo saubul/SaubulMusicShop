@@ -9,10 +9,12 @@ import ru.saubulprojects.shop.model.User;
 
 public interface UserService extends UserDetailsService{
 	
-	public User findByUsername(String username); 
+	User findByUsername(String username); 
 	
-	public User save(UserDTO userDTO);
+	User save(UserDTO userDTO);
 	
-	public User update(User user, User user2);
+	User update(User user, User user2);
+
+	void addProduct(User user, Long id);
 	
 }

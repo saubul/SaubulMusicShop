@@ -12,10 +12,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ru.saubulprojects.shop.dto.UserDTO;
+import ru.saubulprojects.shop.model.Basket;
+import ru.saubulprojects.shop.model.BasketProduct;
 import ru.saubulprojects.shop.model.Role;
 import ru.saubulprojects.shop.model.User;
 import ru.saubulprojects.shop.repository.RoleRepository;
 import ru.saubulprojects.shop.repository.UserRepository;
+import ru.saubulprojects.shop.service.BasketProductService;
+import ru.saubulprojects.shop.service.BasketService;
+import ru.saubulprojects.shop.service.ProductService;
 import ru.saubulprojects.shop.service.UserService;
 
 @Service
@@ -24,11 +29,22 @@ public class UserServiceImpl implements UserService{
 	private final UserRepository userRepo;
 	private final RoleRepository roleRepo;
 	private final PasswordEncoder passEncoder;
+	private final BasketProductService basketProductService;
+	private final ProductService productService;
+	private final BasketService basketService;
 	
-	public UserServiceImpl(UserRepository userRepo, RoleRepository roleRepo, PasswordEncoder passEncoder) {
+	public UserServiceImpl(UserRepository userRepo, 
+						   RoleRepository roleRepo, 
+						   PasswordEncoder passEncoder,
+						   BasketProductService basketProductService,
+						   ProductService productService,
+						   BasketService basketService) {
 		this.userRepo = userRepo;
 		this.passEncoder = passEncoder;
 		this.roleRepo = roleRepo;
+		this.basketProductService = basketProductService;
+		this.productService = productService;
+		this.basketService = basketService;
 	}
 	
 	@Override
@@ -38,14 +54,16 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User save(UserDTO userDTO) {
-		return userRepo.save(new User(userDTO.getFirstName(), 
-				  					  userDTO.getLastName(), 
-				  					  userDTO.getEmail(), 
-				  					  passEncoder.encode(userDTO.getPassword()),
-				  					  userDTO.getPhone(),
-				  					  Arrays.asList(roleRepo.findByName("ROLE_USER")),
-				  					  userDTO.getImg()
-				  					  ));
+		User user = userRepo.save(new User(userDTO.getFirstName(), 
+				  userDTO.getLastName(), 
+				  userDTO.getEmail(), 
+				  passEncoder.encode(userDTO.getPassword()),
+				  userDTO.getPhone(),
+				  Arrays.asList(roleRepo.findByName("ROLE_USER")),
+				  userDTO.getImg()
+				  ));
+		user.setBasket(basketService.save(new Basket(user)));
+		return user;
 	}
 	
 	@Override
@@ -55,6 +73,11 @@ public class UserServiceImpl implements UserService{
 		user.setPhone(user2.getPhone());
 		return userRepo.save(user);
 		
+	}
+	
+	@Override
+	public void addProduct(User user, Long id) {
+		basketProductService.save(new BasketProduct(basketService.findBasketByUserId(user.getId()), productService.findProductById(id), 1));
 	}
 	
 	@Override

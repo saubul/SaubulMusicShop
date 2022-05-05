@@ -12,7 +12,7 @@ import ru.saubulprojects.shop.model.Product;
 public interface ProductRepository extends JpaRepository<Product, Long>{
 
 	
-	@Query("SELECT p FROM Product p WHERE p.name LIKE CONCAT('%', :name, '%')")
+	@Query("SELECT p FROM Product p WHERE UPPER(p.name) LIKE UPPER(CONCAT('%', :name, '%'))")
 	Page<Product> findProductsByName(String name, Pageable pageable);
 	
 }

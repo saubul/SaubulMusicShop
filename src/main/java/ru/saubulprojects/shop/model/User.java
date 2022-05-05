@@ -50,7 +50,7 @@ public class User{
 	@OneToMany(targetEntity = Order.class, mappedBy = "user")
 	private Collection<Order> orders;
 	
-	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Basket basket;
 	
 	private String img;

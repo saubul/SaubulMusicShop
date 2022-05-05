@@ -1,6 +1,6 @@
 package ru.saubulprojects.shop.model;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -24,7 +24,11 @@ public class Basket {
 	private User user;
 	
 
-	@OneToMany(targetEntity = BasketProduct.class, mappedBy = "basketId")
-	private Collection<BasketProduct> basketProducts;
+	@OneToMany(targetEntity = BasketProduct.class, mappedBy = "basket")
+	private List<BasketProduct> basketProducts;
+	
+	public Basket(User user) {
+		this.user = user;
+	}
 	
 }

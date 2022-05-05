@@ -28,10 +28,10 @@ public class Product {
 	
 	private String img;
 	
-	@OneToMany(targetEntity = OrderProduct.class, mappedBy = "productId")
+	@OneToMany(targetEntity = OrderProduct.class, mappedBy = "product")
     private Collection<OrderProduct> orderProducts;
 	
-	@OneToMany(targetEntity = BasketProduct.class, mappedBy = "productId")
+	@OneToMany(targetEntity = BasketProduct.class, mappedBy = "product")
 	private Collection<BasketProduct> basketProducts;
 	
 	@ManyToMany

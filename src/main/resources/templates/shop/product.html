@@ -31,7 +31,9 @@
 								</div>
 								<div class = "row">
 									<div class = "col d-flex justify-content-end">
-										<a th:href="@{/}" class = "btn btn-primary">Купить</a>
+										<form th:method="POST" th:action="@{'/profile/addProduct?id=' + ${product.getId()}}">
+											<button type="submit" class = "btn btn-primary">Добавить в корзину</button>
+										</form>
 									</div>
 								</div>
 							</div>

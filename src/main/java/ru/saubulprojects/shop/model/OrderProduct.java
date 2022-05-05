@@ -19,11 +19,11 @@ public class OrderProduct {
 	
 	@ManyToOne(targetEntity = Order.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "order_id_fk"))
-	private Order orderId;
+	private Order order;
 	
 	@ManyToOne(targetEntity = Product.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "product_id_fk"))
-	private Product productId;
+	private Product product;
 	
 	private int count;
 	

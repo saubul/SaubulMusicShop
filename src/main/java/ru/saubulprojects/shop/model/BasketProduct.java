@@ -19,12 +19,17 @@ public class BasketProduct {
 	
 	@ManyToOne
 	@JoinColumn(name = "basket_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "basket_id_fk"))
-	private Basket basketId;
+	private Basket basket;
 	
 	@ManyToOne
 	@JoinColumn(name = "product_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "product_id_fk"))
-	private Product productId;
+	private Product product;
 	
 	private int count;
 	
+	public BasketProduct(Basket basket, Product product, int count) {
+		this.basket = basket;
+		this.product = product;
+		this.count = count;
+	}
 }
