@@ -33,7 +33,7 @@ public class Order {
 	@OneToMany(targetEntity = OrderProduct.class, mappedBy = "order", cascade = CascadeType.ALL)
 	public Collection<OrderProduct> orderProducts;
 	
-	@ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+	@ManyToOne(targetEntity = User.class)
 	@JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "user_id_fk"))
 	private User user;
 	

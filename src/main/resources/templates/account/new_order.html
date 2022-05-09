@@ -23,6 +23,7 @@
 								</tr>
 							</thead>
 							
+							
 							<tr class = "d-flex justify-content-between" th:each="basketProduct: ${basketProducts}">
 								<td> <img th:src="@{${basketProduct.getProduct().getImg()}}" width="150" height="150" class = "rounded"/> </td>
 								<td class = "d-flex align-items-center"> <span class = "display-4" th:text="${basketProduct.getProduct().getDescription()}"></span> </td>

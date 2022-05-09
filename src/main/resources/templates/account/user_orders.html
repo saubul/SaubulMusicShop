@@ -22,11 +22,16 @@
 								</tr>
 							</thead>
 							
-							<tr th:if="${orderProducts.size()} == 0">
+							<tr th:if="${orders.size()} == 0">
 								<td>Нет заказов</td>
 							</tr>
 							
-							
+							<tr class = "d-flex justify-content-between" th:each="order: ${orders}">
+								<td class = "display-6"><span th:text="'Заказ ' + ${order.getId()} + ' от ' + ${order.getDateCreated()}"></span></td>
+								<td class = "display-6">
+								Цена: <span th:text="${order.getPrice()}"></span></td>
+								
+							</tr>
 						</tbody>
 					</table>
 				</div>

@@ -43,13 +43,13 @@ public class User{
 	@Pattern(regexp = "^8[0-9]{10}$", message = "Введите корректный номер телефона.")
 	private String phone;
 	
-	@ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
+	@ManyToMany(targetEntity = Role.class, fetch = FetchType.LAZY)
 	@JoinTable(name = "users_roles", schema = "shop",
 			   joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "user_id_fk"))},
 			   inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "role_id_fk"))})
 	private Collection<Role> roles;
 	
-	@OneToMany(targetEntity = Order.class, mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToMany(targetEntity = Order.class, mappedBy = "user", fetch = FetchType.EAGER)
 	private Collection<Order> orders;
 	
 	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER)

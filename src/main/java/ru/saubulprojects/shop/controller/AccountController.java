@@ -126,7 +126,7 @@ public class AccountController {
 															 		it.getProduct(), 
 															 		it.getCount(), 
 															 		it.getProduct().getPrice().multiply(BigDecimal.valueOf(it.getCount())));
-								 order.getPrice().add(op.getPrice());
+								 order.setPrice(order.getPrice().add(op.getPrice()));
 								 return op;
 							 })
 						     .collect(Collectors.toList());
@@ -134,18 +134,22 @@ public class AccountController {
 		orderService.save(order);
 		basketProductService.deleteBasketProducts(basketProducts);
 		model.addAttribute("user", user);
-		return "account/new_order";
+		return "redirect:/profile/orders";
 	}
 	
 	@GetMapping("/orders")
 	public String getOrdersForm(Model model) {
-		if(user == null) {
-			user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-		}
+		user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		model.addAttribute("user", user);
 		
-		model.addAttribute("orderProducts", user.getOrders());
+		model.addAttribute("orders", user.getOrders());
 		
-		return "account/orders";
+		return "account/user_orders";
+	}
+	
+	@GetMapping("/orders/{id}")
+	public String getOrderForm(@PathVariable("id") Long id) {
+		
+		return "account/order";
 	}
 }
