@@ -57,8 +57,8 @@
 					    <li><a class="dropdown-item" th:href="@{/}">Something else here</a></li>
 					  </ul>
 					</div>
-		    		<form class="d-flex mx-3">
-					    <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
+		    		<form th:method="GET" th:action="@{/page/1}" class="d-flex mx-3">
+					    <input class="form-control me-2" type="search" placeholder="Поиск" th:name="searchName" aria-label="Search">
 					    <button class="btn btn-outline-success" type="submit">Поиск</button>
 					</form>
 	    		</div>
@@ -67,7 +67,8 @@
 	    		<div class = "d-flex align-items-center">
 	    			<div class="dropdown">
 	    				<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-							<img th:src="@{{path} (path = ${user.getImg()})}" width="30" height="30" class="mx-2 my-2 rounded-circle" alt="Cinque Terre">
+							<img th:if="${user.getImg()==null}" th:src="@{/images/favicon.ico}" width="30" height="30" class="mx-4 my-2 rounded-circle" alt="Cinque Terre">
+			 		<img th:if="${user.getImg()!=null}"th:src="@{user.getImg()}" width="30" height="30" class="mx-4 my-2 rounded-circle" alt="Cinque Terre">
 						</button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 							<li><a class="dropdown-item" th:href="@{/profile}">Профиль</a></li>

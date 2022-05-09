@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude="basket")
 public class User{
 	
 	@Id
@@ -47,10 +49,10 @@ public class User{
 			   inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "role_id_fk"))})
 	private Collection<Role> roles;
 	
-	@OneToMany(targetEntity = Order.class, mappedBy = "user")
+	@OneToMany(targetEntity = Order.class, mappedBy = "user", fetch = FetchType.LAZY)
 	private Collection<Order> orders;
 	
-	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
 	private Basket basket;
 	
 	private String img;

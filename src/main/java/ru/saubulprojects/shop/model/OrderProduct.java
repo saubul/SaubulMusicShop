@@ -1,5 +1,7 @@
 package ru.saubulprojects.shop.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -27,5 +29,12 @@ public class OrderProduct {
 	
 	private int count;
 	
-	private int price;
+	private BigDecimal price;
+	
+	public OrderProduct(Order order, Product product, int count, BigDecimal price) {
+		this.order = order;
+		this.product = product;
+		this.count = count;
+		this.price = price;
+	}
 }

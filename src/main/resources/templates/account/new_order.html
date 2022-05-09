@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>Корзина</title>
+		<title>Новый заказ</title>
 		<link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
 							   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
@@ -19,19 +19,15 @@
 						<tbody>
 							<thead>
 								<tr>
-									<th class = "h2">Корзина</th>
+									<th class = "h2">Новый заказ</th>
 								</tr>
 							</thead>
-							
-							<tr th:if="${basketProducts.size()} == 0">
-								<td>Корзина пуста</td>
-							</tr>
 							
 							<tr class = "d-flex justify-content-between" th:each="basketProduct: ${basketProducts}">
 								<td> <img th:src="@{${basketProduct.getProduct().getImg()}}" width="150" height="150" class = "rounded"/> </td>
 								<td class = "d-flex align-items-center"> <span class = "display-4" th:text="${basketProduct.getProduct().getDescription()}"></span> </td>
 								<td class = "d-flex align-items-end"> 
-									<a th:href="@{/profile/basket/delete_product/{id} (id = ${basketProduct.getId()})}" class = "btn btn-danger">Удалить</a> 
+									<a th:href="@{/profile/basket/delete_product/{id} (id = ${basketProduct.getProduct().getId()})}" class = "btn btn-danger">Удалить</a> 
 								</td>
 							</tr>
 						</tbody>
@@ -39,10 +35,10 @@
 					
 					<br>
 					
-					<form th:if="${basketProducts.size()} != 0" th:method="GET" th:action="@{/profile/orders/new_order}">
+					<form th:if="${basketProducts} != null" th:method="POST" th:action="@{/profile/orders/new_order}">
 						<div class = "row">
 							<div class = "d-flex justify-content-end align-items-center">
-								<button type="submit" class = "btn btn-primary">Оформить заказ</button>
+								<button type="submit" class = "btn btn-primary">Создать заказ</button>
 							</div>
 						</div>				
 					</form>
@@ -51,9 +47,8 @@
 			</div>
 		
 		</div>
-		
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
-				integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
-				crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+			crossorigin="anonymous"></script>
 	</body>
 </html>

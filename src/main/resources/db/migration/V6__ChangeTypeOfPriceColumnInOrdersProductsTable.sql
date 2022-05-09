@@ -1,0 +1,1 @@
+alter table shop.orders_products alter column price type numeric(19,2) using price::numeric;
