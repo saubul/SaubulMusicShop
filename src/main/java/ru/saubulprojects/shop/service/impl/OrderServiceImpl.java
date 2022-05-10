@@ -19,4 +19,9 @@ public class OrderServiceImpl implements OrderService{
 	public Order save(Order order) {
 		return orderRepo.saveAndFlush(order);
 	}
+
+	@Override
+	public Order findById(Long id) {
+		return orderRepo.findById(id).get();
+	}
 }

@@ -5,5 +5,7 @@ import ru.saubulprojects.shop.model.Order;
 public interface OrderService {
 
 	Order save(Order order);
+
+	Order findById(Long id);
 	
 }

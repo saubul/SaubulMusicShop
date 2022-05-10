@@ -148,8 +148,12 @@ public class AccountController {
 	}
 	
 	@GetMapping("/orders/{id}")
-	public String getOrderForm(@PathVariable("id") Long id) {
-		
+	public String getOrderForm(@PathVariable("id") Long id, Model model) {
+		if(user == null) {
+			user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		}
+		model.addAttribute("user", user);
+		model.addAttribute("order", orderService.findById(id));
 		return "account/order";
 	}
 }

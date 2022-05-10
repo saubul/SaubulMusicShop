@@ -7,6 +7,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -43,7 +46,8 @@ public class User{
 	@Pattern(regexp = "^8[0-9]{10}$", message = "Введите корректный номер телефона.")
 	private String phone;
 	
-	@ManyToMany(targetEntity = Role.class, fetch = FetchType.LAZY)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany(targetEntity = Role.class)
 	@JoinTable(name = "users_roles", schema = "shop",
 			   joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "user_id_fk"))},
 			   inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "role_id_fk"))})
