@@ -15,6 +15,17 @@
 			<div class = "row justify-content-center">
 				<div class = "col-md-5 border rounded bg-light my-2 py-4">
 					<span class = "h2" th:text="'Заказ ' + ${order.getId()}"></span>
+					
+					<table class = "table table-borderless">
+						<tbody>							
+							<tr class = "d-flex justify-content-between" th:each="orderProduct: ${order.getOrderProducts()}">
+								<td> <img th:src="@{${orderProduct.getProduct().getImg()}}" width="150" height="150" class = "rounded"/> </td>
+								<td class = "d-flex align-items-center"> <span class = "display-4" th:text="${orderProduct.getProduct().getDescription()}"></span> </td>
+
+							</tr>
+						</tbody>
+					</table>
+					
 				</div>
 			</div>
 		</div>

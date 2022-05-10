@@ -13,7 +13,7 @@
 		<br>
 		<div class = "container-fluid">
 			<div class = "row justify-content-center">
-				<div class = "col-md-5 border rounded bg-light my-2 py-4">
+				<div class = "col-md-7 border rounded bg-light my-2 py-4">
 					<table class = "table table-borderless">
 						<tbody>
 							<thead>
@@ -28,8 +28,8 @@
 							
 							<tr class = "d-flex justify-content-between" th:each="order: ${orders}">
 								<td class = "display-6">
-									<a th:href="@{/profile/orders/{id} (id = ${order.getId()})}">
-										<span th:text="'Заказ ' + ${order.getId()} + ' от ' + ${order.getDateCreated()}"></span>
+									<a class = "text-decoration-none" th:href="@{/profile/orders/{id} (id = ${order.getId()})}">
+										<span th:text="'Заказ ' + ${order.getId()} + ' от ' + ${#temporals.format(order.getDateCreated(), 'dd-MM-yyyy')}"></span>
 									</a>
 								</td>
 								<td class = "display-6">
