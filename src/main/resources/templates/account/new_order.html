@@ -27,8 +27,10 @@
 							<tr class = "d-flex justify-content-between border rounded my-2 bg-white" th:each="basketProduct: ${basketProducts}">
 								<td> <img th:src="@{${basketProduct.getProduct().getImg()}}" width="150" height="150" class = "rounded"/> </td>
 								<td class = "d-flex align-items-center"> <span class = "display-4" th:text="${basketProduct.getProduct().getDescription()}"></span> </td>
-								<td class = "d-flex align-items-end"> 
-									<a th:href="@{/profile/basket/delete_product/{id} (id = ${basketProduct.getProduct().getId()})}" class = "btn btn-danger">Удалить</a> 
+								<td class = "d-flex flex-column justify-content-end"> 
+									<div  class = "d-flex">
+										 Количество:&nbsp<span th:text="${basketProduct.getCount()}"></span>
+									</div>
 								</td>
 							</tr>
 						</tbody>
@@ -39,7 +41,7 @@
 					<form th:if="${basketProducts} != null" th:method="POST" th:action="@{/profile/orders/new_order}">
 						<div class = "row">
 							<div class = "d-flex justify-content-end align-items-center">
-								<button type="submit" class = "btn btn-primary">Создать заказ</button>
+								<button type="submit" class = "btn btn-primary">Подтвердить</button>
 							</div>
 						</div>				
 					</form>
