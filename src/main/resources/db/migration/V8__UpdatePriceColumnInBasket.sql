@@ -1,0 +1,1 @@
+update shop.basket set price = 0.0;

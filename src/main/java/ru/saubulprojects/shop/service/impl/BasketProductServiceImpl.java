@@ -35,8 +35,8 @@ public class BasketProductServiceImpl implements BasketProductService{
 	}
 
 	@Override
-	public void deleteBasketProduct(Long id) {
-		basketProductRepo.delete(basketProductRepo.findById(id).get());
+	public void delete(BasketProduct basketProduct) {
+		basketProductRepo.delete(basketProduct);
 	}
 
 	@Override
@@ -48,6 +48,11 @@ public class BasketProductServiceImpl implements BasketProductService{
 	@Override
 	public BasketProduct findByProductAndBasket(Product product, Basket basket) {
 		return basketProductRepo.findByProductAndBasket(product, basket);
+	}
+
+	@Override
+	public BasketProduct findById(Long id) {
+		return basketProductRepo.findById(id).get();
 	}
 
 

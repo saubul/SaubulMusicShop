@@ -31,7 +31,7 @@ public class ShopController {
 							   Model model) {
 		Page<Product> page = Page.empty();
 		model.addAttribute("searchName", searchName);
-		page = productService.findProductsByName(pageNo, searchName);
+		page = productService.findAllByName(pageNo, searchName);
 		
 		
 		model.addAttribute("products", page.getContent());

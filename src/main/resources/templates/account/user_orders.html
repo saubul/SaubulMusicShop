@@ -34,10 +34,25 @@
 								</td>
 								<td class = "display-6">
 								Цена: <span th:text="${order.getPrice()}"></span></td>
-								
 							</tr>
 						</tbody>
 					</table>
+					<div th:if="${totalPages} > 1" class = "d-flex justify-content-end align-items-center">
+						<div class = "col-sm-1">
+							<a th:if="${currentPage} != 1" th:href="@{/profile/orders/page/{pageNo} (pageNo = ${currentPage - 1})}" th:text="'<'"></a>
+							<span th:if="${currentPage} == 1" th:text="'<'"></span>
+						</div>
+						<div class = "col-sm-1">
+							<span th:each="i : ${#numbers.sequence(1, totalPages)}">
+								<a th:if="${i} != ${currentPage}" th:href="@{/profile/orders/page/{pageNo} (pageNo = ${i})}">[[${i}]]</a>
+								<span th:if="${i} == ${currentPage}">[[${i}]]</span>
+							</span>
+						</div>
+						<div class = "col-sm-1">
+							<a th:if="${currentPage} != ${totalPages}" th:href="@{/profile/orders/page/{pageNo} (pageNo = ${currentPage + 1})}" th:text="'>'"></a>
+							<span th:if="${currentPage} == ${totalPages}" th:text="'>'"></span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

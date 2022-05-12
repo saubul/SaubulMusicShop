@@ -13,10 +13,12 @@ public interface BasketProductService {
 
 	List<BasketProduct> findAllByBasketId(Basket basket);
 
-	void deleteBasketProduct(Long id);
+	void delete(BasketProduct basketProduct);
 
 	void deleteBasketProducts(List<BasketProduct> basketProducts);
 
 	BasketProduct findByProductAndBasket(Product product, Basket basket);
+
+	BasketProduct findById(Long id);
 	
 }

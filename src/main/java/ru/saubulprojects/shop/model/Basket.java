@@ -1,5 +1,6 @@
 package ru.saubulprojects.shop.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.*;
@@ -23,12 +24,14 @@ public class Basket {
 	@JoinColumn(name = "user_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "user_id_fk"))
 	private User user;
 	
+	private BigDecimal price;
 
 	@OneToMany(targetEntity = BasketProduct.class, mappedBy = "basket")
 	private List<BasketProduct> basketProducts;
 	
 	public Basket(User user) {
 		this.user = user;
+		this.price = BigDecimal.ZERO;
 	}
 	
 }

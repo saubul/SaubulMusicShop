@@ -19,7 +19,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public Page<Product> findProductsByName(int pageNo, String name) {
+	public Page<Product> findAllByName(int pageNo, String name) {
 
 		
 		return productRepo.findProductsByName(name, PageRequest.of(pageNo - 1, 3));

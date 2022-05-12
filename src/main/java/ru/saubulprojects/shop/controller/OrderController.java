@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ru.saubulprojects.shop.model.Basket;
 import ru.saubulprojects.shop.model.BasketProduct;
 import ru.saubulprojects.shop.model.Order;
 import ru.saubulprojects.shop.model.OrderProduct;
 import ru.saubulprojects.shop.model.OrderStatus;
 import ru.saubulprojects.shop.model.User;
 import ru.saubulprojects.shop.service.BasketProductService;
+import ru.saubulprojects.shop.service.BasketService;
 import ru.saubulprojects.shop.service.OrderService;
 import ru.saubulprojects.shop.service.UserService;
 
@@ -29,14 +32,17 @@ public class OrderController {
 	private final UserService userService;
 	private final BasketProductService basketProductService;
 	private final OrderService orderService;
+	private final BasketService basketService;
 	
 	
 	public OrderController(UserService userService, 
 						   BasketProductService basketProductService,
-						   OrderService orderService) {
+						   OrderService orderService,
+						   BasketService basketService) {
 		this.userService = userService;
 		this.basketProductService = basketProductService;
 		this.orderService = orderService;
+		this.basketService = basketService;
 	}
 	
 	@GetMapping("/orders/new_order")
@@ -55,6 +61,7 @@ public class OrderController {
 			user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		}
 		List<BasketProduct> basketProducts = basketProductService.findAllByBasketId(user.getBasket());
+		
 		Order order = new Order();
 		order.setPrice(BigDecimal.ZERO);
 		order.setStatus(OrderStatus.NEW);
@@ -71,18 +78,32 @@ public class OrderController {
 						     .collect(Collectors.toList());
 		order.setOrderProducts(orderProducts);
 		orderService.save(order);
+		
 		basketProductService.deleteBasketProducts(basketProducts);
+		
+		Basket basket = user.getBasket();
+		basket.setPrice(BigDecimal.ZERO);
+		basketService.save(basket);
 		model.addAttribute("user", user);
 		return "redirect:/profile/orders";
 	}
 	
 	@GetMapping("/orders")
 	public String getOrdersForm(Model model) {
+		getOrdersPageForm(1, model);
+		
+		return "account/user_orders";
+	}
+	
+	@GetMapping("/orders/page/{pageNo}")
+	public String getOrdersPageForm(@PathVariable("pageNo") int pageNo, Model model) {
 		user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		
+		Page<Order> pageOrder = orderService.findAllByUser(user, pageNo);
 		model.addAttribute("user", user);
-		
-		model.addAttribute("orders", user.getOrders());
-		
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", pageOrder.getTotalPages());
+		model.addAttribute("orders", pageOrder.getContent());
 		return "account/user_orders";
 	}
 	

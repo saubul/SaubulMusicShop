@@ -45,7 +45,9 @@
 							</tr>
 						</tbody>
 					</table>
-					
+					<div class = "d-flex justify-content-end">
+						<span th:text="'Общая цена: ' + ${price}"></span>
+					</div>
 					<br>
 					
 					<form th:if="${basketProducts.size()} != 0" th:method="GET" th:action="@{/profile/orders/new_order}">

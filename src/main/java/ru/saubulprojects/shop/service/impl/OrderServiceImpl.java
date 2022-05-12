@@ -1,8 +1,12 @@
 package ru.saubulprojects.shop.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ru.saubulprojects.shop.model.Order;
+import ru.saubulprojects.shop.model.User;
 import ru.saubulprojects.shop.repository.OrderRepository;
 import ru.saubulprojects.shop.service.OrderService;
 
@@ -23,5 +27,10 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Order findById(Long id) {
 		return orderRepo.findById(id).get();
+	}
+
+	@Override
+	public Page<Order> findAllByUser(User user, int pageNo) {
+		return orderRepo.findAllByUser(user, PageRequest.of(pageNo - 1, 5));
 	}
 }

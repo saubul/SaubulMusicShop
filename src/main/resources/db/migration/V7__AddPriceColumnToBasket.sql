@@ -1,0 +1,1 @@
+alter table shop.basket add column price numeric(19,2);
