@@ -77,7 +77,14 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public void addProduct(User user, Long id) {
-		basketProductService.save(new BasketProduct(basketService.findBasketByUserId(user.getId()), productService.findProductById(id), 1));
+		Basket basket = basketService.findByUser(user);
+		BasketProduct basketProduct = basketProductService.findByProductAndBasket(productService.findById(id), basket);
+		if(basketProduct != null) {
+			basketProduct.setCount(basketProduct.getCount() + 1);
+		} else {
+			basketProduct = new BasketProduct(basket, productService.findById(id), 1);
+		}
+		basketProductService.save(basketProduct);
 	}
 	
 	@Override

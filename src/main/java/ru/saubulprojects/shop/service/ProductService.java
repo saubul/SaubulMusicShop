@@ -6,7 +6,7 @@ import ru.saubulprojects.shop.model.Product;
 
 public interface ProductService {
 	
-	Product findProductById(Long id);
+	Product findById(Long id);
 	
 	Page<Product> findProductsByName(int pageNo, String name);
 	

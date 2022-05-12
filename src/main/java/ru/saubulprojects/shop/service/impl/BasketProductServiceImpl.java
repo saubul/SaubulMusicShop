@@ -45,6 +45,11 @@ public class BasketProductServiceImpl implements BasketProductService{
 		basketProducts.stream().forEach(it -> basketProductRepo.delete(it));
 	}
 
+	@Override
+	public BasketProduct findByProductAndBasket(Product product, Basket basket) {
+		return basketProductRepo.findByProductAndBasket(product, basket);
+	}
+
 
 
 }

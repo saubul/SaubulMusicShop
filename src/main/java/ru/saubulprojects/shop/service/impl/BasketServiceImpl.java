@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import ru.saubulprojects.shop.model.Basket;
 import ru.saubulprojects.shop.model.BasketProduct;
+import ru.saubulprojects.shop.model.User;
 import ru.saubulprojects.shop.repository.BasketRepository;
 import ru.saubulprojects.shop.service.BasketService;
 import ru.saubulprojects.shop.service.ProductService;
@@ -26,8 +27,8 @@ public class BasketServiceImpl implements BasketService{
 	}
 
 	@Override
-	public Basket findBasketByUserId(Long id) {
-		return basketRepo.findBasketByUserId(id);
+	public Basket findByUser(User user) {
+		return basketRepo.findByUser(user);
 	}
 	
 }

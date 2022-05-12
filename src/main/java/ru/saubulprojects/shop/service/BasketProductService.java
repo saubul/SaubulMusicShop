@@ -16,5 +16,7 @@ public interface BasketProductService {
 	void deleteBasketProduct(Long id);
 
 	void deleteBasketProducts(List<BasketProduct> basketProducts);
+
+	BasketProduct findByProductAndBasket(Product product, Basket basket);
 	
 }

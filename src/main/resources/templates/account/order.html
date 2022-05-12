@@ -18,10 +18,14 @@
 					
 					<table class = "table table-borderless">
 						<tbody>							
-							<tr class = "d-flex justify-content-between" th:each="orderProduct: ${order.getOrderProducts()}">
-								<td> <img th:src="@{${orderProduct.getProduct().getImg()}}" width="150" height="150" class = "rounded"/> </td>
+							<tr class = "d-flex justify-content-between  border rounded my-2 bg-white" th:each="orderProduct: ${order.getOrderProducts()}">
+								<td> 
+									<a th:href="@{/product/{id} (id = ${orderProduct.getProduct.getId()})}">
+										<img th:src="@{${orderProduct.getProduct().getImg()}}" width="150" height="150" class = "rounded"/> 
+									</a>
+								</td>
 								<td class = "d-flex align-items-center"> <span class = "display-4" th:text="${orderProduct.getProduct().getDescription()}"></span> </td>
-
+								<td class = "d-flex align-items-end"><span th:text="'Количество: ' + ${orderProduct.getCount()}"></span> </td>
 							</tr>
 						</tbody>
 					</table>

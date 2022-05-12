@@ -1,6 +1,5 @@
 package ru.saubulprojects.shop.service;
 
-import javax.validation.Valid;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
