@@ -1,5 +1,7 @@
 package ru.saubulprojects.shop.service.impl;
 
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,5 +34,10 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Page<Order> findAllByUser(User user, int pageNo) {
 		return orderRepo.findAllByUser(user, PageRequest.of(pageNo - 1, 5));
+	}
+
+	@Override
+	public Page<Order> findAllByUserAndDate(User user, LocalDate date, int pageNo) {
+		return orderRepo.findAllByUserAndDateCreated(user, date, PageRequest.of(pageNo - 1, 5));
 	}
 }

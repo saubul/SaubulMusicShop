@@ -19,6 +19,7 @@
 							<thead>
 								<tr>
 									<th class = "h2">Заказы</th>
+									
 								</tr>
 							</thead>
 							
@@ -37,20 +38,27 @@
 							</tr>
 						</tbody>
 					</table>
-					<div th:if="${totalPages} > 1" class = "d-flex justify-content-end align-items-center">
-						<div class = "col-sm-1">
-							<a th:if="${currentPage} != 1" th:href="@{/profile/orders/page/{pageNo} (pageNo = ${currentPage - 1})}" th:text="'<'"></a>
-							<span th:if="${currentPage} == 1" th:text="'<'"></span>
-						</div>
-						<div class = "col-sm-1">
-							<span th:each="i : ${#numbers.sequence(1, totalPages)}">
-								<a th:if="${i} != ${currentPage}" th:href="@{/profile/orders/page/{pageNo} (pageNo = ${i})}">[[${i}]]</a>
-								<span th:if="${i} == ${currentPage}">[[${i}]]</span>
-							</span>
-						</div>
-						<div class = "col-sm-1">
-							<a th:if="${currentPage} != ${totalPages}" th:href="@{/profile/orders/page/{pageNo} (pageNo = ${currentPage + 1})}" th:text="'>'"></a>
-							<span th:if="${currentPage} == ${totalPages}" th:text="'>'"></span>
+					
+					<div class = "d-flex justify-content-between">
+						<form th:if="${orders.size()} != 0" th:method="GET" th:action="@{/profile/orders}" class="d-flex align-items-center">
+							<input id="date" class = "form-control" th:name="date" type="date">
+							<button class = "btn btn-primary align-self-stretch mx-1" type="submit">Найти</button>
+						</form>
+						<div th:if="${totalPages} > 1" class = "d-flex justify-content-between align-items-center">
+							<div class = "d-flex col-sm-1">
+								<a th:if="${currentPage} != 1" th:href="@{'/profile/orders/page/' + ${currentPage - 1} + '?date=' + ${date}}" th:text="'<'"></a>
+								<span th:if="${currentPage} == 1" th:text="'<'"></span>
+							</div>
+							<div class = "d-flex col-sm-1 px-4 justify-content-center">
+								<span th:each="i : ${#numbers.sequence(1, totalPages)}">
+									<a th:if="${i} != ${currentPage}" th:href="@{'/profile/orders/page/' + ${i} + '?date=' + ${date}}">[[${i}]]</a>
+									<span th:if="${i} == ${currentPage}">[[${i}]]</span>
+								</span>
+							</div>
+							<div class = "d-flex col-sm-1">
+								<a th:if="${currentPage} != ${totalPages}" th:href="@{'/profile/orders/page/' + ${currentPage + 1} + '?date=' + ${date}}" th:text="'>'"></a>
+								<span th:if="${currentPage} == ${totalPages}" th:text="'>'"></span>
+							</div>
 						</div>
 					</div>
 				</div>

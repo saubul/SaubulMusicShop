@@ -1,6 +1,7 @@
 package ru.saubulprojects.shop.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class Order {
 	
 	@CreationTimestamp
 	@Column(name = "date_created")
-	private LocalDateTime dateCreated;
+	private LocalDate dateCreated;
 	
 	@OneToMany(targetEntity = OrderProduct.class, mappedBy = "order", cascade = CascadeType.ALL)
 	public Collection<OrderProduct> orderProducts;

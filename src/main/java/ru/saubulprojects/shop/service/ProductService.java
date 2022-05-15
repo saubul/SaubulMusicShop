@@ -8,6 +8,6 @@ public interface ProductService {
 	
 	Product findById(Long id);
 	
-	Page<Product> findAllByName(int pageNo, String name);
+	Page<Product> findAllByNameAndCategory(String searchName, String category, int pageNo);
 	
 }

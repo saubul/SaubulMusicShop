@@ -1,0 +1,1 @@
+alter table shop.orders alter column date_created type date;

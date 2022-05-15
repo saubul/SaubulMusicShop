@@ -1,10 +1,14 @@
 package ru.saubulprojects.shop.controller;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ru.saubulprojects.shop.model.Basket;
 import ru.saubulprojects.shop.model.BasketProduct;
@@ -89,17 +94,28 @@ public class OrderController {
 	}
 	
 	@GetMapping("/orders")
-	public String getOrdersForm(Model model) {
-		getOrdersPageForm(1, model);
+	public String getOrdersForm(@RequestParam(value = "date", required=false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, Model model) {
+		getOrdersPageForm(1, date, model);
 		
 		return "account/user_orders";
 	}
 	
 	@GetMapping("/orders/page/{pageNo}")
-	public String getOrdersPageForm(@PathVariable("pageNo") int pageNo, Model model) {
+	public String getOrdersPageForm(@PathVariable("pageNo") int pageNo, 
+									@RequestParam(value = "date", required=false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, 
+									Model model) {
 		user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		
-		Page<Order> pageOrder = orderService.findAllByUser(user, pageNo);
+		Page<Order> pageOrder =  Page.empty();
+		
+		System.out.println(date);
+		if(date!=null) {
+			pageOrder = orderService.findAllByUserAndDate(user, date, pageNo);
+			model.addAttribute("date", date);
+		} else {
+			pageOrder = orderService.findAllByUser(user, pageNo);
+			model.addAttribute("date","");
+		}
 		model.addAttribute("user", user);
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalPages", pageOrder.getTotalPages());

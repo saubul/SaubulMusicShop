@@ -20,24 +20,28 @@ public class ShopController {
 	}
 	
 	@GetMapping("/")
-	public String homeForm(Model model) {
+	public String homeForm(@RequestParam(value = "category", defaultValue = "") String category,
+						   Model model) {
 		
-		return homePageForm(1, "", model);
+		return homePageForm(1, "", category, model);
 	}
 	
 	@GetMapping("/page/{pageNo}")
 	public String homePageForm(@PathVariable("pageNo") int pageNo, 
 							   @RequestParam(value = "searchName", defaultValue = "") String searchName,
+							   @RequestParam(value = "category", defaultValue = "") String category,
 							   Model model) {
-		Page<Product> page = Page.empty();
+		
+		Page<Product> page = productService.findAllByNameAndCategory(searchName, category, pageNo);
+		
 		model.addAttribute("searchName", searchName);
-		page = productService.findAllByName(pageNo, searchName);
-		
-		
+		model.addAttribute("category", category);
+		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("products", page.getContent());
 		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("currentPage", pageNo);
+
 		return "shop/home";
 		
 	}
+	
 }

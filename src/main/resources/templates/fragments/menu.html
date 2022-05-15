@@ -19,9 +19,18 @@
 					    Каталог
 					  </button>
 					  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					    <li><a class="dropdown-item" th:href="@{/}">Action</a></li>
-					    <li><a class="dropdown-item" th:href="@{/}">Another action</a></li>
-					    <li><a class="dropdown-item" th:href="@{/}">Something else here</a></li>
+					    <li>
+					    	<form th:method="GET" th:action="@{/}">
+					    		<input th:name="category" value="Спокойные" type="hidden"> 
+					    		<button class="dropdown-item" type = "submit">Спокойные</button>
+					    	</form>
+					    </li>
+					    <li>
+					    	<form th:method="GET" th:action="@{/}">
+					    		<input th:name="category" value="Энергичные" type="hidden"> 
+					    		<button class="dropdown-item" type = "submit">Энергичные</button>
+					    	</form>
+					    </li>
 					  </ul>
 					</div>
 		    		<form th:method="GET" th:action="@{/page/1}" class="d-flex mx-3">
@@ -55,9 +64,18 @@
 					    Каталог
 					  </button>
 					  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					    <li><a class="dropdown-item" th:href="@{/}">Action</a></li>
-					    <li><a class="dropdown-item" th:href="@{/}">Another action</a></li>
-					    <li><a class="dropdown-item" th:href="@{/}">Something else here</a></li>
+					    <li>
+					    	<form th:method="GET" th:action="@{/}">
+					    		<input th:name="category" value="Спокойные" type="hidden"> 
+					    		<button class="dropdown-item" type = "submit">Спокойные</button>
+					    	</form>
+					    </li>
+					    <li>
+					    	<form th:method="GET" th:action="@{/}">
+					    		<input th:name="category" value="Энергичные" type="hidden"> 
+					    		<button class="dropdown-item" type = "submit">Энергичные</button>
+					    	</form>
+					    </li>
 					  </ul>
 					</div>
 		    		<form th:method="GET" th:action="@{/page/1}" class="d-flex mx-3">
