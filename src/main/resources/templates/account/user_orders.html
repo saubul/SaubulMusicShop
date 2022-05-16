@@ -24,7 +24,7 @@
 							</thead>
 							
 							<tr th:if="${orders.size()} == 0">
-								<td>Нет заказов</td>
+								<td>Нет заказов<span th:if="${date!=null}" th:text="' на ' + ${#temporals.format(date, 'dd-MM-yyyy')}"></span></td>
 							</tr>
 							
 							<tr class = "d-flex justify-content-between border rounded my-2 py-4 bg-white" th:each="order: ${orders}">

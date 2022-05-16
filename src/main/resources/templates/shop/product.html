@@ -15,15 +15,16 @@
 				<div class = "row justify-content-center">
 					<div class = "col-md-7 border rounded bg-light my-2 py-4">
 						
-						<div class = "d-flex justify-content-center">	
+						<div class = "d-flex justify-content-center align-items-center">	
 							<span class = "h3" th:text="${product.getName()}"></span>
 						</div>
 						
 						<div class = "d-flex justify-content-between align-items-center my-3">
-							<div class = "d-flex">
+							<div class = "d-flex flex-column">
 								<a th:href="@{/product/{id} (id = ${product.getId()})}">
-									<img th:src="${product.getImg()}" width="300" height="300" class = "rounded"/>
+									<img th:src="${product.getImg()}" width="300" height="300" class = "rounded my-1"/>
 								</a>
+								<audio controls th:src="${product.getAudio()}"></audio>
 							</div>
 							<div class = "d-flex align-items-center">
 								<span class = "display-3" th:text="${product.getDescription()}"></span>

@@ -28,6 +28,8 @@ public class Product {
 	
 	private String img;
 	
+	private String audio;
+	
 	@OneToMany(targetEntity = OrderProduct.class, mappedBy = "product")
     private Collection<OrderProduct> orderProducts;
 	
