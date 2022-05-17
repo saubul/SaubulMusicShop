@@ -23,28 +23,16 @@ public class AuthController {
 		this.userService = userService;
 	}
 	
-	@ModelAttribute("userDTO")
-	public UserDTO userDTO() {
-		return new UserDTO();
-	}
-	
-	@ModelAttribute("userExists")
-	public boolean exist() {
-		return false;
-	}
-	
-	@ModelAttribute("passMismatchs")
-	public boolean mismatch() {
-		return false;
-	}
-	
 	@GetMapping("/login")
 	public String loginForm() {
 		return "auth/login";
 	}
 	
 	@GetMapping("/registration")
-	public String registrationForm() {
+	public String registrationForm(Model model) {
+		model.addAttribute("userDTO", new UserDTO());
+		model.addAttribute("userExists", false);
+		model.addAttribute("passMismatchs", false);
 		return "auth/registration";
 	}
 	

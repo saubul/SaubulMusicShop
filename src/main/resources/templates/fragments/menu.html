@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<div id = "nav-menu">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class = "container-fluid">
-				<div class = "d-flex align-items-center">
-					<img th:src="@{/images/Бар кукол.jpg}" width="50" height="50" class="mx-2 my-2 rounded" alt="Cinque Terre"/>
-		    		<a class="navbar-brand mx-2" th:href="@{/}">
-		    			<span class = "display-6">SAUSHOP</span>
-		    		</a>
-		    		<div class="dropdown">
-					  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-					    Каталог
-					  </button>
-					  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					    <li>
-					    	<form th:method="GET" th:action="@{/}">
-					    		<input th:name="category" value="Спокойные" type="hidden"> 
-					    		<button class="dropdown-item" type = "submit">Спокойные</button>
-					    	</form>
-					    </li>
-					    <li>
-					    	<form th:method="GET" th:action="@{/}">
-					    		<input th:name="category" value="Энергичные" type="hidden"> 
-					    		<button class="dropdown-item" type = "submit">Энергичные</button>
-					    	</form>
-					    </li>
-					  </ul>
-					</div>
-		    		<form th:method="GET" th:action="@{/page/1}" class="d-flex mx-3">
-					    <input class="form-control me-2" type="search" placeholder="Поиск" th:name="searchName" aria-label="Search">
-					    <button class="btn btn-outline-success" type="submit">Поиск</button>
-					</form>
-		    				
-	    		</div>
-	    			<div sec:authorize="isAnonymous()" class = "d-flex">
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	</head>
+	<body>
+		<div id = "nav-menu">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class = "container-fluid">
+					<div class = "d-flex align-items-center">
+						<img th:src="@{/images/Бар кукол.jpg}" width="50" height="50" class="mx-2 my-2 rounded" alt="Cinque Terre"/>
+			    		<a class="navbar-brand mx-2" th:href="@{/}">
+			    			<span class = "display-6">SAUSHOP</span>
+			    		</a>
+			    		<div class="dropdown">
+						  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+						    Каталог
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+						    <li>
+						    	<form th:method="GET" th:action="@{/}">
+						    		<input th:name="category" value="Спокойные" type="hidden"> 
+						    		<button class="dropdown-item" type = "submit">Спокойные</button>
+						    	</form>
+						    </li>
+						    <li>
+						    	<form th:method="GET" th:action="@{/}">
+						    		<input th:name="category" value="Энергичные" type="hidden"> 
+						    		<button class="dropdown-item" type = "submit">Энергичные</button>
+						    	</form>
+						    </li>
+						  </ul>
+						</div>
+			    		<form th:method="GET" th:action="@{/page/1}" class="d-flex mx-3">
+						    <input class="form-control me-2" type="search" placeholder="Поиск" th:name="searchName" aria-label="Search">
+						    <button class="btn btn-outline-success" type="submit">Поиск</button>
+						</form>
+			    				
+		    		</div>
+		    		<div sec:authorize="isAnonymous()" class = "d-flex">
 						<a class="nav-link active h6 my-0" th:href="@{/login}">Войти</a>
 						<a class="nav-link active h6 my-0" th:href="@{/registration}">Зарегистрироваться</a>
 					</div>
@@ -49,58 +49,58 @@
 					</div>
 				</div>			
 			</nav>
-	</div>
+		</div>
+		
+		<div id="nav-menu-profile">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class = "container-fluid">
+					<div class = "d-flex align-items-center">
+						<img th:src="@{/images/Бар кукол.jpg}" width="50" height="50" class="mx-2 my-2 rounded" alt="Cinque Terre"/>
+			    		<a class="navbar-brand mx-2" th:href="@{/}">
+			    			<span class = "display-6">SAUSHOP</span>
+			    		</a>
+			    		<div class="dropdown">
+						  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+						    Каталог
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+						    <li>
+						    	<form th:method="GET" th:action="@{/}">
+						    		<input th:name="category" value="Спокойные" type="hidden"> 
+						    		<button class="dropdown-item" type = "submit">Спокойные</button>
+						    	</form>
+						    </li>
+						    <li>
+						    	<form th:method="GET" th:action="@{/}">
+						    		<input th:name="category" value="Энергичные" type="hidden"> 
+						    		<button class="dropdown-item" type = "submit">Энергичные</button>
+						    	</form>
+						    </li>
+						  </ul>
+						</div>
+			    		<form th:method="GET" th:action="@{/page/1}" class="d-flex mx-3">
+						    <input class="form-control me-2" type="search" placeholder="Поиск" th:name="searchName" aria-label="Search">
+						    <button class="btn btn-outline-success" type="submit">Поиск</button>
+						</form>
+		    		</div>
+		    		
 	
-	<div id="nav-menu-profile">
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class = "container-fluid">
-				<div class = "d-flex align-items-center">
-					<img th:src="@{/images/Бар кукол.jpg}" width="50" height="50" class="mx-2 my-2 rounded" alt="Cinque Terre"/>
-		    		<a class="navbar-brand mx-2" th:href="@{/}">
-		    			<span class = "display-6">SAUSHOP</span>
-		    		</a>
-		    		<div class="dropdown">
-					  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-					    Каталог
-					  </button>
-					  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-					    <li>
-					    	<form th:method="GET" th:action="@{/}">
-					    		<input th:name="category" value="Спокойные" type="hidden"> 
-					    		<button class="dropdown-item" type = "submit">Спокойные</button>
-					    	</form>
-					    </li>
-					    <li>
-					    	<form th:method="GET" th:action="@{/}">
-					    		<input th:name="category" value="Энергичные" type="hidden"> 
-					    		<button class="dropdown-item" type = "submit">Энергичные</button>
-					    	</form>
-					    </li>
-					  </ul>
+		    		<div class = "d-flex align-items-center">
+		    			<div class="dropdown">
+		    				<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+								<img th:if="${user.getImg()==null}" th:src="@{/images/favicon.ico}" width="30" height="30" class="mx-4 my-2 rounded-circle" alt="Cinque Terre">
+				 		<img th:if="${user.getImg()!=null}"th:src="@{user.getImg()}" width="30" height="30" class="mx-4 my-2 rounded-circle" alt="Cinque Terre">
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+								<li><a class="dropdown-item" th:href="@{/profile}">Профиль</a></li>
+								<li><a class="dropdown-item" th:href="@{/profile/basket}">Корзина</a></li>
+								<li><a class="dropdown-item" th:href="@{/profile/orders}">Заказы</a></li>
+							</ul>
+						</div>
+						<a class="nav-link active h6 my-0" th:href="@{/logout}">Выйти</a>
 					</div>
-		    		<form th:method="GET" th:action="@{/page/1}" class="d-flex mx-3">
-					    <input class="form-control me-2" type="search" placeholder="Поиск" th:name="searchName" aria-label="Search">
-					    <button class="btn btn-outline-success" type="submit">Поиск</button>
-					</form>
-	    		</div>
-	    		
-
-	    		<div class = "d-flex align-items-center">
-	    			<div class="dropdown">
-	    				<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-							<img th:if="${user.getImg()==null}" th:src="@{/images/favicon.ico}" width="30" height="30" class="mx-4 my-2 rounded-circle" alt="Cinque Terre">
-			 		<img th:if="${user.getImg()!=null}"th:src="@{user.getImg()}" width="30" height="30" class="mx-4 my-2 rounded-circle" alt="Cinque Terre">
-						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-							<li><a class="dropdown-item" th:href="@{/profile}">Профиль</a></li>
-							<li><a class="dropdown-item" th:href="@{/profile/basket}">Корзина</a></li>
-							<li><a class="dropdown-item" th:href="@{/profile/orders}">Заказы</a></li>
-						</ul>
-					</div>
-					<a class="nav-link active h6 my-0" th:href="@{/logout}">Выйти</a>
-				</div>
-			</div>			
-		</nav>
-	</div>
-</body>
+				</div>			
+			</nav>
+		</div>
+	</body>
 </html>

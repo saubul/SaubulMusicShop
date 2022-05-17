@@ -8,19 +8,15 @@ import ru.saubulprojects.shop.model.Basket;
 import ru.saubulprojects.shop.model.BasketProduct;
 import ru.saubulprojects.shop.model.Product;
 import ru.saubulprojects.shop.repository.BasketProductRepository;
-import ru.saubulprojects.shop.repository.ProductRepository;
 import ru.saubulprojects.shop.service.BasketProductService;
 
 @Service
 public class BasketProductServiceImpl implements BasketProductService{
 
 	private final BasketProductRepository basketProductRepo;
-	private final ProductRepository productRepo;
 	
-	public BasketProductServiceImpl(BasketProductRepository basketProductRepo,
-									ProductRepository productRepo) {
+	public BasketProductServiceImpl(BasketProductRepository basketProductRepo) {
 		this.basketProductRepo = basketProductRepo;
-		this.productRepo = productRepo;
 	}
 	
 	@Override

@@ -3,21 +3,16 @@ package ru.saubulprojects.shop.service.impl;
 import org.springframework.stereotype.Service;
 
 import ru.saubulprojects.shop.model.Basket;
-import ru.saubulprojects.shop.model.BasketProduct;
 import ru.saubulprojects.shop.model.User;
 import ru.saubulprojects.shop.repository.BasketRepository;
 import ru.saubulprojects.shop.service.BasketService;
-import ru.saubulprojects.shop.service.ProductService;
 
 @Service
 public class BasketServiceImpl implements BasketService{
 		
-	private final ProductService productService;
 	private final BasketRepository basketRepo;
 	
-	public BasketServiceImpl(ProductService productService,
-							 BasketRepository basketRepo) {
-		this.productService = productService;
+	public BasketServiceImpl(BasketRepository basketRepo) {
 		this.basketRepo = basketRepo;
 	}
 
