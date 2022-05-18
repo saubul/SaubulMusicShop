@@ -42,17 +42,17 @@
 						<div class = "row my-2">
 							<div class = "d-inline-flex justify-content-end">
 								<div class = "col-sm-1">
-									<a th:if="${currentPage} != 1" th:href="@{'/page/' + ${currentPage - 1}  + '?searchName=' + ${searchName} + '&category=' + ${category}}" th:text="'<'"></a>
+									<a th:if="${currentPage} != 1" th:href="@{'/page/' + ${currentPage - 1}(searchName=${searchName},category=${category})}" th:text="'<'"></a>
 									<span th:if="${currentPage} == 1" th:text="'<'"></span>
 								</div>
 								<div class = "col-sm-1">
 									<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-										<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i} + '?searchName=' + ${searchName} + '&category=' + ${category}}">[[${i}]]</a>
+										<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}(searchName=${searchName},category=${category})}">[[${i}]]</a>
 										<span th:if = "${currentPage == i}">[[${i}]]</span>
 									</span>
 								</div>
 								<div class = "col-sm-1">
-									<a th:if="${currentPage} != ${totalPages}" th:href="@{'/page/' + ${currentPage + 1}  + '?searchName=' + ${searchName} + '&category=' + ${category}}" th:text="'>'"></a>
+									<a th:if="${currentPage} != ${totalPages}" th:href="@{'/page/' + ${currentPage + 1}(searchName=${searchName},category=${category})}" th:text="'>'"></a>
 									<span th:if="${currentPage} == ${totalPages}" th:text="'>'"></span>
 								</div>
 							</div>

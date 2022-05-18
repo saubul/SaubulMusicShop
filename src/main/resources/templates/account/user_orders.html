@@ -46,17 +46,17 @@
 						</form>
 						<div th:if="${totalPages} > 1" class = "d-flex justify-content-between align-items-center">
 							<div class = "d-flex col-sm-1">
-								<a th:if="${currentPage} != 1" th:href="@{'/profile/orders/page/' + ${currentPage - 1} + '?date=' + ${date}}" th:text="'<'"></a>
+								<a th:if="${currentPage} != 1" th:href="@{'/profile/orders/page/' + ${currentPage - 1}(date=${date})}" th:text="'<'"></a>
 								<span th:if="${currentPage} == 1" th:text="'<'"></span>
 							</div>
 							<div class = "d-flex col-sm-1 px-4 justify-content-center">
 								<span th:each="i : ${#numbers.sequence(1, totalPages)}">
-									<a th:if="${i} != ${currentPage}" th:href="@{'/profile/orders/page/' + ${i} + '?date=' + ${date}}">[[${i}]]</a>
+									<a th:if="${i} != ${currentPage}" th:href="@{'/profile/orders/page/' + ${i}(date=${date})}">[[${i}]]</a>
 									<span th:if="${i} == ${currentPage}">[[${i}]]</span>
 								</span>
 							</div>
 							<div class = "d-flex col-sm-1">
-								<a th:if="${currentPage} != ${totalPages}" th:href="@{'/profile/orders/page/' + ${currentPage + 1} + '?date=' + ${date}}" th:text="'>'"></a>
+								<a th:if="${currentPage} != ${totalPages}" th:href="@{'/profile/orders/page/' + ${currentPage + 1}(date=${date})}" th:text="'>'"></a>
 								<span th:if="${currentPage} == ${totalPages}" th:text="'>'"></span>
 							</div>
 						</div>
